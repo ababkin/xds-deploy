@@ -1,0 +1,30 @@
+name:                deploy
+version:             0.1.0.0
+description:         Deploy tool for xdataset
+license:             AllRightsReserved
+author:              Alex Babkin
+maintainer:          ababkin@gmail.com
+build-type:          Simple
+cabal-version:       >=1.8
+
+executable deploy
+  hs-source-dirs: src
+  main-is:        Main.hs
+  ghc-options:    
+    -static 
+    -Wall 
+    -threaded 
+    -O2
+    -rtsopts
+    "-with-rtsopts=-N"
+
+  buildable: True
+  build-depends:
+      base
+    , text
+    , mtl
+    , async
+    , text
+    , turtle
+    , system-filepath
+
