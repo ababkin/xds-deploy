@@ -40,8 +40,10 @@ copyExec curDir appName =
   where
     volumeMapping = encode curDir `T.append` "/deploy:/deploy"
     opts = joinSpaces [rmContainerOpt, volumeOpt volumeMapping]
-    execPath = "/root/.cabal/bin/" `T.append` appName
-    cmd = joinSpaces ["cp", execPath, "/deploy"]
+    {- execPath = "/root/.cabal/bin/" `T.append` appName -}
+    {- cmd = joinSpaces ["cp", execPath, "/deploy"] -}
+    cmd = T.concat ["find dist -path '*/", appName, "/", appName, "' -exec cp {} /deploy ';'"]
+    {- cmd = joinSpaces ["cp -r dist /deploy"] -}
 
 pullScratchImage = 
   runCmd $ joinSpaces [docker, pull, remoteImageRepo "haskell-scratch" "integer-gmp"]
